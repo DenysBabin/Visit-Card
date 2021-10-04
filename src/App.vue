@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <MainPage msg="Отдохните! И посмотрите на котят!"></MainPage>
+    <NavMenu></NavMenu>
+    <router-view/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import MainPage from './components/MainPage.vue'
+// import HelloWorld from './components/MyProfilePage.vue'
+import NavMenu from './components/NavMenu.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    MainPage,
+    NavMenu,
   }
 }
 </script>
@@ -25,6 +26,5 @@ body {
 #app {
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
