@@ -11,25 +11,32 @@
         Осторожно! Если вы считаете, что стили, которые вы видите - красивые, то лучше не трогайте - ибо у вас похоже странный вкус )
       </div>
 
-      <div class="style-text">
-        <VCSelect :textValue="fontSizeValue"
-                  @test="testFunc"
-                  :options="fontSizes"
-        >
+      <div class="style-text" v-for="input in massInputs" :key="input.id">
+<!--        <VCSelect :textValue="fontSizeValue"-->
+<!--                  @test="testFunc"-->
+<!--                  :options="fontSizes"-->
+<!--        >-->
 
-        </VCSelect>
-        <el-button type="primary" @click="saveStyles()">Применить стили</el-button>
+<!--        </VCSelect>-->
+
+        <VCInput
+            :textValue="input.modelValue"
+            @changeEvent="input.eventReaction"
+            :placeholder="input.placeholder"
+        />
       </div>
+      <el-button type="primary" @click="saveStyles()">Применить стили</el-button>
+
     </div>
 
     <div v-for="item in photos" :key="item.id">
       <div :style="'background-color:' + item.bgc " class="item">
         <div class="item-text">
-          <div class="item-title" :style="'font-size:' + fontSizeValue ">
+          <div class="item-title" :style="'font-size:' + styles.fontTitleStyle + ';' + 'color:' + styles.colorTitleStyle">
             {{ item.title }}
           </div>
 
-          <div class="item-description">
+          <div class="item-description" :style="'font-size:' + styles.fontDescriptionStyle + ';' + 'color:' + styles.colorDescriptionStyle">
             {{ item.description }}
           </div>
         </div>
@@ -46,14 +53,15 @@
 </template>
 
 <script>
-import VCSelect from '../components/gui/VCSelect.vue'
+// import VCSelect from '../components/gui/VCSelect.vue'
+import VCInput from '../components/gui/VCInput.vue'
 
 export default {
   props: {
     msg: String
   },
   components: {
-    VCSelect,
+    VCInput,
   },
   name: "MainPage",
   data() {
@@ -106,40 +114,101 @@ export default {
         value: '10px',
         label: '10px'
       }, {
-        value: '12px',
-        label: '12px'
-      }, {
         value: '14px',
         label: '14px'
       }, {
-        value: '16px',
-        label: '16px'
-      }, {
         value: '18px',
         label: '18px'
+      }, {
+        value: '22px',
+        label: '22px'
+      }, {
+        value: '26px',
+        label: '26px'
       }],
-      fontSizeValue: '',
-      test: '1'
+
+      test: '1',
+
+      inputs: {
+        fontTitleStyle: '',
+        fontDescriptionStyle: '',
+        colorTitleStyle: '',
+        colorDescriptionStyle: '',
+      },
+
+
+      styles: {
+        fontTitleStyle: '16px',
+        fontDescriptionStyle: '12px',
+        colorTitleStyle: '',
+        colorDescriptionStyle: '',
+
+      },
+
+      massInputs: [
+        {
+          id: 1,
+          modelValue: '',
+          eventReaction: this.changeTitle,
+          placeholder: "Размер Заголовков у картинок",
+        },
+        {
+          id: 2,
+          modelValue: '',
+          eventReaction: this.changeDescription,
+          placeholder: "Размер Описания у картинок",
+        },
+        {
+          id: 3,
+          modelValue: '',
+          eventReaction: this.changeTitleColor,
+          placeholder: "Цвет Текста Заголовка в формате #XXXXXX",
+        },
+        {
+          id: 4,
+          modelValue: '',
+          eventReaction: this.changeDescriptionColor,
+          placeholder: "Цвет Текста Описания в формате #XXXXXX",
+        },
+      ]
+
 
       // TODO - сделать так, чтобы можно было настраивать с помощью кнопок расположение элементов. В более сложной версии играться с flexbox count
     
     };
   },
   methods: {
-    testFunc(event) {
-      this.fontSizeValue = event
+    changeTitle(event) {
+      this.inputs.fontTitleStyle = event
+    },
+
+    changeDescription(event) {
+      this.inputs.fontDescriptionStyle = event
+    },
+
+    changeTitleColor(event) {
+      this.inputs.colorTitleStyle = event
+    },
+
+    changeDescriptionColor(event) {
+      this.inputs.colorDescriptionStyle = event
     },
 
     saveStyles() {
-      console.log(this.fontSizeValue)
+      this.styles.fontTitleStyle = this.inputs.fontTitleStyle + 'px'
+      this.styles.fontDescriptionStyle = this.inputs.fontDescriptionStyle + 'px'
+      this.styles.colorTitleStyle = this.inputs.colorTitleStyle
+      this.styles.colorDescriptionStyle = this.inputs.colorDescriptionStyle
     }
   },
   computed: {
-    checkTect() {
-      console.log('checkTect')
-      return this.fontSizeValue
-    }
-  }
+    // checkTect() {
+    //   console.log('checkTect')
+    //   return this.fontSizeValue
+    // }
+  },
+
+
 }
 </script>
 

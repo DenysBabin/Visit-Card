@@ -14,13 +14,13 @@
 <script>
 export default {
   props: {
-    textValue: String,
     options: Array,
   },
   mame: 'VCSelect',
   data() {
     return {
       oneTest: 'lsdkjf',
+      textValue: '',
     }
   }
 }
