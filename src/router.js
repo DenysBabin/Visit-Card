@@ -7,15 +7,15 @@ import Home from './pages/Home.vue'
 export default new VueRouter({
     routes: [
         {
-            path: '',
+            path: '*',
             component: Home
         },
         {
-            path: '/hello',
+            path: '/int-pages/hello',
             component: HelloWorld
         },
         {
-            path: '/cat',
+            path: '/int-pages/cat',
             component: CatPage
         }
     ],

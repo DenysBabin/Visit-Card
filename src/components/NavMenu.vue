@@ -10,10 +10,10 @@
         router
         active-text-color="#ffd04b">
       <el-menu-item index="/">Главная страница</el-menu-item>
-      <el-submenu>
+      <el-submenu index="/int-pages">
         <template slot="title">Прикольные страницы</template>
-        <el-menu-item index="/cat">Страница с котятами</el-menu-item>
-        <el-menu-item index="/hello">Страница обо мне</el-menu-item>
+        <el-menu-item index="/int-pages/cat">Страница с котятами</el-menu-item>
+        <el-menu-item index="/int-pages/hello">Страница обо мне</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" disabled>Инфо</el-menu-item>
       <el-menu-item index="4" disabled>Коммикс</el-menu-item>
@@ -31,9 +31,7 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-
+    handleSelect(keyPath) {
       this.$router.push(keyPath)
     }
   }
