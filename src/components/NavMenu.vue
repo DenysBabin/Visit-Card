@@ -40,4 +40,8 @@ export default {
 
 <style scoped>
 
+::v-deep .el-menu.el-menu--horizontal {
+  border-bottom: 0;
+}
+
 </style>
